@@ -22,6 +22,23 @@
         width: 350px;
         height: 350px;
     }
+
+    .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .article-card:first-child,
+    .article-card:nth-child(2),
+    .article-card:nth-child(3) {
+        transform: translateY(0) !important;
+        order: unset !important;
+    }
+
+    .article-card:first-child:hover,
+    .article-card:nth-child(2):hover,
+    .article-card:nth-child(3):hover {
+        transform: translateY(-10px) !important;
+    }
 }
 
 @media (max-width: 768px) {
