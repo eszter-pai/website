@@ -14,6 +14,7 @@
 
 body {
     font-family: 'Courier New', Courier, monospace;
+    position: relative;
     background-color: var(--dark-bg);
     color: var(--white);
     overflow-x: hidden;
@@ -33,7 +34,7 @@ body {
     position: fixed;
     width: 120px;
     height: 120px;
-    z-index: 1;
+    z-index: 100;
 }
 
 .decorative-dots.top-right { 
@@ -55,6 +56,19 @@ body {
     border-top-right-radius: 50%;
     opacity: 0.5;
 }
+
+.decorative-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(244, 168, 184, 0.15) 0%, rgba(244, 168, 184, 0.05) 100%);
+    clip-path: ellipse(100% 100% at 50% 100%);
+    z-index: 50;
+    pointer-events: none;
+}
+
 
 /* Navigation */
 .navbar {
@@ -126,7 +140,7 @@ body {
     justify-content: center;
     padding: 4rem 0;
     position: relative;
-    z-index: 5;
+    z-index: 2;
 }
 
 .hero-content {
@@ -354,20 +368,8 @@ body {
     padding: 5rem 0 8rem;
     background-color: var(--dark-bg);
     position: relative;
-    z-index: 5;
+    z-index: 2;
     overflow: hidden;
-}
-
-.articles-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(180deg, rgba(59, 61, 77, 0.8) 0%, rgba(59, 61, 77, 1) 100%);
-    clip-path: ellipse(100% 100% at 50% 100%);
-    z-index: -1;
 }
 
 .section-header {
