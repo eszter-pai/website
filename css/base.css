@@ -1,0 +1,26 @@
+/* Base Styles - Reset and Variables */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-bg: #2b2d3a;
+    --pink: #f4a8b8;
+    --pink-light: #ffc6d3;
+    --white: #ffffff;
+    --gray-text: #8b8d98;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    background-color: var(--dark-bg);
+    color: var(--white);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

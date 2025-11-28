@@ -1,0 +1,142 @@
+/* Character Component */
+
+.character-wrapper {
+    position: relative;
+}
+
+.pink-circle {
+    width: 400px;
+    height: 400px;
+    background-color: var(--pink);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid var(--white);
+}
+
+.ninja-cat {
+    position: relative;
+    width: 250px;
+    height: 300px;
+}
+
+/* Cat Ears */
+.ear {
+    position: absolute;
+    width: 60px;
+    height: 70px;
+    background-color: var(--dark-bg);
+    border-radius: 50% 50% 0 0;
+    top: -10px;
+}
+
+.ear::before {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 40px;
+    background-color: var(--pink);
+    border-radius: 50% 50% 0 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ear-left {
+    left: 30px;
+    transform: rotate(-15deg);
+}
+
+.ear-right {
+    right: 30px;
+    transform: rotate(15deg);
+}
+
+/* Head */
+.head {
+    position: absolute;
+    width: 180px;
+    height: 160px;
+    background-color: var(--dark-bg);
+    border-radius: 50%;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.eyes {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.eye {
+    width: 40px;
+    height: 8px;
+    background-color: var(--white);
+    border-radius: 4px;
+}
+
+.nose {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid var(--pink);
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Body */
+.body {
+    position: absolute;
+    width: 200px;
+    height: 180px;
+    background-color: var(--dark-bg);
+    border-radius: 40% 40% 50% 50%;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wave-symbol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: var(--white);
+    font-weight: bold;
+}
+
+/* Arms */
+.arm {
+    position: absolute;
+    width: 80px;
+    height: 100px;
+    background-color: var(--dark-bg);
+    border-radius: 50%;
+    top: 200px;
+}
+
+.arm-left {
+    left: 0;
+    transform: rotate(-30deg);
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+}
+
+.arm-right {
+    right: 0;
+    transform: rotate(30deg);
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+}

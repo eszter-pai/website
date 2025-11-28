@@ -1,0 +1,91 @@
+/* Articles Component */
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.article-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.article-card:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.article-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.1);
+}
+
+.article-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+.article-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.article-date {
+    color: var(--gray-text);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.read-more {
+    display: inline-block;
+    color: var(--pink);
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding: 0 2rem;
+    transition: all 0.3s ease;
+}
+
+.read-more::before,
+.read-more::after {
+    content: '—';
+    position: absolute;
+    color: var(--pink);
+    transition: all 0.3s ease;
+}
+
+.read-more::before {
+    left: 0;
+}
+
+.read-more::after {
+    right: 0;
+}
+
+.read-more:hover {
+    color: var(--pink-light);
+}
+
+.read-more:hover::before,
+.read-more:hover::after {
+    color: var(--pink-light);
+}
