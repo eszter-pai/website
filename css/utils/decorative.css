@@ -2,8 +2,8 @@
 
 .decorative-dots {
     position: fixed;
-    width: 120px;
-    height: 120px;
+    width: 170px;
+    height: 170px;
     z-index: 100;
 }
 
@@ -15,7 +15,7 @@
         radial-gradient(circle, var(--white) 2px, transparent 2px);
     background-size: 20px 20px, 20px 20px;
     background-position: 0 0, 10px 10px;
-    border-bottom-left-radius: 50%;
+    border-bottom-left-radius: 80%;
 }
 
 .decorative-wave {
@@ -23,7 +23,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 200px;
+    height: 300px;
     z-index: 50;
     pointer-events: none;
 }

@@ -2,10 +2,39 @@
 
 .articles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    align-items: end;
+    margin-top: 3rem;
+}
+
+.article-card:first-child {
+    transform: translateY(-40px);
+    order: 2;
+}
+
+.article-card:first-child:hover {
+    transform: translateY(-50px);
+}
+
+.article-card:nth-child(2) {
+    order: 1;
+    transform: translateY(60px);
+}
+
+.article-card:nth-child(2):hover {
+    transform: translateY(50px);
+}
+
+.article-card:nth-child(3) {
+    order: 3;
+    transform: translateY(60px);
+}
+
+.article-card:nth-child(3):hover {
+    transform: translateY(50px);
 }
 
 .article-card {
