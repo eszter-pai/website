@@ -19,6 +19,65 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Create cursor follower paw
+const cursorPaw = document.createElement('img');
+cursorPaw.id = 'cursor-paw';
+cursorPaw.src = 'img/cat_tap_2.png';
+document.body.appendChild(cursorPaw);
+
+// Cursor paw position tracking with lag
+let pawX = 0;
+let pawY = 0;
+let targetX = 0;
+let targetY = 0;
+let rotation = 0;
+
+// Track mouse movement for cursor paw
+document.addEventListener('mousemove', function(e) {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    
+    // Check if hovering over interactive elements
+    const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
+    if (hoveredElement && (hoveredElement.closest('a, button, input, textarea, select, .article-card, .pink-circle, .profile-image, .cta-button, .social-icons, .scroll-down, h1, h2, h3, p, img'))) {
+        cursorPaw.classList.add('hidden');
+    } else {
+        cursorPaw.classList.remove('hidden');
+    }
+});
+
+// Animate cursor paw with lag and rotation
+function animateCursorPaw() {
+    // Add lag effect (smooth following)
+    const lag = 0.05;
+    pawX += (targetX - pawX) * lag;
+    pawY += (targetY - pawY) * lag;
+    
+    // Add slight randomness
+    const randomOffsetX = (Math.random() - 0.5) * 2;
+    const randomOffsetY = (Math.random() - 0.5) * 2;
+    
+    // Slowly rotate the paw
+    rotation += 0.5;
+    
+    cursorPaw.style.left = (pawX + randomOffsetX) + 'px';
+    cursorPaw.style.top = (pawY + randomOffsetY) + 'px';
+    cursorPaw.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+    
+    requestAnimationFrame(animateCursorPaw);
+}
+
+animateCursorPaw();
+
+// Hide cursor paw when mouse leaves the window
+document.addEventListener('mouseleave', function() {
+    cursorPaw.classList.add('hidden');
+});
+
+document.addEventListener('mouseenter', function() {
+    cursorPaw.classList.remove('hidden');
+});
+
 // Cat paw click animation
 document.addEventListener('click', function(e) {
     // Don't show on clicks on links or buttons

@@ -23,6 +23,27 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+}
+
+/* Custom cursor for links */
+a {
+    cursor: url('../img/cat_cursor.png'), pointer;
+}
+
+/* Cursor follower paw */
+#cursor-paw {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+}
+
+#cursor-paw.hidden {
+    opacity: 0;
 }
 
 /* Cat paw click animation */
