@@ -67,6 +67,7 @@
 .social-icons a:hover {
     color: var(--pink-light);
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(244, 168, 184, 0.3);
 }
 
 /* Scroll Down Button */

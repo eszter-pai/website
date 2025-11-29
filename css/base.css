@@ -26,6 +26,20 @@ body {
     cursor: pointer;
 }
 
+/* Mobile tap hint */
+.mobile-tap-hint {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    color: var(--white);
+    font-size: 0.85rem;
+    z-index: 10000;
+    opacity: 0.7;
+    font-family: 'Courier New', Courier, monospace;
+    pointer-events: none;
+}
+
 /* Custom cursor for links */
 a {
     cursor: url('../img/cat_cursor.png'), pointer;

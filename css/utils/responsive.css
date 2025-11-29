@@ -79,6 +79,10 @@
     #cursor-paw {
         display: none !important;
     }
+
+    .mobile-tap-hint {
+        display: block !important;
+    }
 }
 
 @media (max-width: 480px) {
