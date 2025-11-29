@@ -59,6 +59,18 @@
     .subtitle {
         font-size: 1rem;
     }
+
+    .hero-section {
+        padding: 2rem 0 !important;
+    }
+
+    .articles-section {
+        padding: 2rem 1rem !important;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -77,5 +89,17 @@
 
     .section-header h2 {
         font-size: 2rem;
+    }
+
+    .hero-section {
+        padding: 2rem 0 !important;
+    }
+
+    .articles-section {
+        padding: 2rem 1rem !important;
+    }
+
+    .container {
+        padding: 0 1rem;
     }
 }
