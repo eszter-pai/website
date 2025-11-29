@@ -71,6 +71,10 @@
     .container {
         padding: 0 1rem;
     }
+
+    .scroll-down {
+        display: none !important;
+    }
 }
 
 @media (max-width: 480px) {

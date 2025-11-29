@@ -24,3 +24,29 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+/* Cat paw click animation */
+.click-paw {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0) scaleX(var(--random-flip, 1)) rotate(var(--random-rotation, -20deg));
+    animation: highFive 0.6s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes highFive {
+    0% {
+        transform: translate(-50%, -50%) scale(0) scaleX(var(--random-flip, 1)) rotate(var(--random-rotation, -20deg));
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) scaleX(var(--random-flip, 1)) rotate(calc(var(--random-rotation, -20deg) + 5deg));
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8) scaleX(var(--random-flip, 1)) rotate(var(--random-rotation, -20deg));
+        opacity: 0;
+    }
+}
