@@ -2,7 +2,7 @@
 
 .container {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 27 auto;
     padding: 0 2rem;
 }
 
@@ -12,7 +12,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 0;
+    padding-bottom: 18rem;
+    padding-top: 15rem;
+    padding-left: 0;
+    padding-right: 0;
     position: relative;
     z-index: 2;
 }
@@ -27,11 +30,15 @@
 
 /* Articles Section */
 .articles-section {
-    padding: 5rem 0 8rem;
+    padding: 0rem 0 13rem;
     background-color: var(--dark-bg);
     position: relative;
     z-index: 2;
     overflow: hidden;
+    padding-bottom: 18rem;
+    padding-top: 0rem;
+    padding-left: 15rem;
+    padding-right: 15rem;
 }
 
 .section-header {
