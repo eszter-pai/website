@@ -25,6 +25,9 @@ cursorPaw.id = 'cursor-paw';
 cursorPaw.src = 'img/cat_tap_2.png';
 document.body.appendChild(cursorPaw);
 
+// Check if device is mobile
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
 // Cursor paw position tracking with lag
 let pawX = 0;
 let pawY = 0;
@@ -34,6 +37,8 @@ let rotation = 0;
 
 // Track mouse movement for cursor paw
 document.addEventListener('mousemove', function(e) {
+    if (isMobile) return; // Skip on mobile
+    
     targetX = e.clientX;
     targetY = e.clientY;
     
@@ -48,6 +53,8 @@ document.addEventListener('mousemove', function(e) {
 
 // Animate cursor paw with lag and rotation
 function animateCursorPaw() {
+    if (isMobile) return; // Skip on mobile
+    
     // Add lag effect (smooth following)
     const lag = 0.05;
     pawX += (targetX - pawX) * lag;
@@ -67,7 +74,9 @@ function animateCursorPaw() {
     requestAnimationFrame(animateCursorPaw);
 }
 
-animateCursorPaw();
+if (!isMobile) {
+    animateCursorPaw();
+}
 
 // Hide cursor paw when mouse leaves the window
 document.addEventListener('mouseleave', function() {

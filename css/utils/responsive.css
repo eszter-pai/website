@@ -75,6 +75,10 @@
     .scroll-down {
         display: none !important;
     }
+
+    #cursor-paw {
+        display: none !important;
+    }
 }
 
 @media (max-width: 480px) {
