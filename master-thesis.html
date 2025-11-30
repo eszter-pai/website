@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LLM Judge & Feedback Loop For Traffic Scene Generation">
+    <title>Master Thesis - Eszter's Portfolio</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/utils/decorative.css">
+    <link rel="stylesheet" href="css/utils/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .blog-post {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px 60px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f4a8b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .post-header {
+            margin-bottom: 40px;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 800;
+        }
+
+        .post-meta {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .post-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: white;
+        }
+
+        .post-content h2 {
+            font-size: 1.8rem;
+            color: white;
+            margin: 40px 0 20px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        .post-content h3 {
+            font-size: 1.4rem;
+            color: white;
+            margin: 30px 0 15px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        .post-content p {
+            margin-bottom: 20px;
+        }
+
+        .post-content ul, .post-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .post-content li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(244, 168, 184, 0.3) 0%, rgba(244, 168, 184, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: rgba(244, 168, 184, 0.2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .results-table-wrapper {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 1rem;
+        }
+
+        .results-table thead {
+            background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);
+            color: white;
+        }
+
+        .results-table th {
+            padding: 16px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .results-table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        .results-table tbody tr:hover {
+            background-color: rgba(244, 168, 184, 0.05);
+        }
+
+        .results-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .results-table td {
+            padding: 16px 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .results-table td:first-child {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .results-table .positive {
+            color: #27ae60;
+            font-weight: 700;
+            background: linear-gradient(120deg, rgba(39, 174, 96, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 2rem;
+            }
+
+            .post-content {
+                font-size: 1rem;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+
+            .results-table th {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-dots top-right"></div>
+
+    <article class="blog-post">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Portfolio
+        </a>
+
+        <header class="post-header">
+            <h1 class="post-title">LLM Judge & Feedback Loop For Traffic Scene Generation</h1>
+            <p class="post-meta">
+                <time datetime="2025-10-21">October 21, 2025</time>
+            </p>
+        </header>
+
+        <div class="post-content">
+            <img src="img/master_thesis_thumbnail.PNG" alt="Master Thesis Project" class="post-image">
+            
+            <h2>Overview</h2>
+            <p>
+                This project investigates how <span class="highlight">smaller, open-source LLMs can serve as effective judges</span> 
+                in an automated feedback loop for traffic scene generation. Rather than relying on large proprietary models, 
+                the system demonstrates that properly configured judge models can enhance retrieval performance, mitigate syntax 
+                inconsistencies, and significantly improve scenario diversity, a persistent challenge in the autonomous vehicle 
+                testing domain.
+            </p>
+            <h2>Research Context</h2>
+            <p>
+                Conducted as part of my Master's thesis at Universität Potsdam in collaboration with 
+                <span class="highlight">Continental Automotive</span> (now <a href="https://www.aumovio.com/" target="_blank" style="color: #f4a8b8; text-decoration: none; border-bottom: 1px solid #f4a8b8;">Aumovio</a>), 
+                this project demonstrates how modern NLP techniques can be applied to safety-critical applications in autonomous vehicle testing and validation. 
+                Built upon the <a href="https://github.com/basiclab/TTSG" target="_blank" style="color: #f4a8b8; text-decoration: none; border-bottom: 1px solid #f4a8b8;">TTSG framework</a> 
+                and utilizing the <a href="https://carla.org/" target="_blank" style="color: #f4a8b8; text-decoration: none; border-bottom: 1px solid #f4a8b8;">CARLA simulator</a> 
+                for rendering and validation, the system bridges the gap between natural language descriptions and executable traffic scenarios.
+            </p>
+
+            <h2>Framework Architecture</h2>
+            <p>
+                The overall framework integrates multiple components to create an intelligent traffic scene generation system. 
+                The architecture combines retrieval mechanisms, LLM-based evaluation, and iterative refinement to produce 
+                high-quality traffic scenarios.
+            </p>
+            <img src="img/new_thesis_framework.png" alt="Overall Framework Architecture" class="post-image">
+
+            <h2>Technology Stack</h2>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Large Language Models</span>
+                <span class="tech-tag">CodeLlama 13B</span>
+                <span class="tech-tag">CARLA Simulator</span>
+                <span class="tech-tag">TTSG Framework</span>
+                <span class="tech-tag">Natural Language Processing</span>
+                <span class="tech-tag">Prompt Engineering</span>
+                <span class="tech-tag">Automated Evaluation</span>
+            </div>
+
+            <h2>Judge Model's Impact on Retrieval</h2>
+            <p>
+                Using <span class="highlight">CodeLlama 13B</span> as the main model and Llama-3 8B and GPT-mini o4 as judge models, 
+                the system evaluates and guides the retrieval process to ensure relevant map layouts are successfully generated.
+            </p>
+            <img src="img/judge_model with codellama13b.PNG" alt="Judge Model with CodeLlama 13B" class="post-image">
+
+            <h2>Evaluation Loop Results</h2>
+            <p>
+                The implementation of the evaluation loop demonstrated significant improvements in scenario diversity. 
+                The iterative feedback mechanism successfully increased the diversity score across multiple metrics:
+            </p>
+            
+            <div class="results-table-wrapper">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Main Model</th>
+                            <th>GPT-4o</th>
+                            <th>GPT-4o</th>
+                            <th>mini-o4</th>
+                        </tr>
+                        <tr>
+                            <th>Eval Loop</th>
+                            <th>FALSE</th>
+                            <th>TRUE</th>
+                            <th>TRUE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Weather</td>
+                            <td>0.80</td>
+                            <td>0.67</td>
+                            <td>0.72</td>
+                        </tr>
+                        <tr>
+                            <td>Daily Traffic</td>
+                            <td>0.79</td>
+                            <td class="positive">0.85</td>
+                            <td class="positive">0.82</td>
+                        </tr>
+                        <tr>
+                            <td>Blocking</td>
+                            <td>0.75</td>
+                            <td class="positive">0.90</td>
+                            <td>0.53</td>
+                        </tr>
+                        <tr>
+                            <td>Cut Off</td>
+                            <td>0.60</td>
+                            <td class="positive">0.72</td>
+                            <td class="positive">0.83</td>
+                        </tr>
+                        <tr>
+                            <td>Crushing</td>
+                            <td>0.50</td>
+                            <td class="positive">0.70</td>
+                            <td class="positive">0.82</td>
+                        </tr>
+                        <tr>
+                            <td>Intersection</td>
+                            <td>0.83</td>
+                            <td>0.68</td>
+                            <td>0.69</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency</td>
+                            <td>0.50</td>
+                            <td class="positive">0.67</td>
+                            <td class="positive">0.8</td>
+                        </tr>
+                        <tr>
+                            <td>Two Wheels</td>
+                            <td>0.714</td>
+                            <td>0.56</td>
+                            <td class="positive">0.8</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Overall</strong></td>
+                            <td>0.685</td>
+                            <td class="positive">0.719</td>
+                            <td class="positive">0.75</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Example: Emergency Scenario</h2>
+            <p>
+                To visualize the impact of the evaluation loop, we examined an emergency case scenario. The comparison below 
+                shows how the framework evolved the scenario generation before and after implementing the evaluation loop, 
+                demonstrating improved complexity, realism, and edge case handling.
+            </p>
+            <img src="img/emergency_before_after.PNG" alt="Emergency Scenario: Before vs After Evaluation Loop" class="post-image">
+
+            <h2>Key Findings</h2>
+            <ul>
+                <li><strong>Judge Model Efficiency:</strong> Demonstrated that effective LLM judges don't require large, proprietary models—smaller open-source models can provide reliable evaluation when properly configured</li>
+                <li><strong>Retrieval Enhancement:</strong> LLM judges significantly improved the retrieval module's performance, ensuring more relevant and accurate map layouts were selected for scenario generation</li>
+                <li><strong>Cross-Module Impact:</strong> Analysis output success in one module (such as retrieval) had cascading positive effects on downstream modules, highlighting the importance of early-stage quality control</li>
+                <li><strong>Diversity Through Iteration:</strong> The evaluation loop successfully increased agent diversity across scenarios, with measurable improvements in edge case coverage and scenario variety</li>
+            </ul>
+
+
+
+            <h2>Future Directions</h2>
+            <ul>
+                <li>Enable LLMs to produce complex dictionary structures and data outputs without relying on pre-existing available data, allowing for more flexible and generalized scenario generation across diverse domains and traffic conditions</li>
+                <li>Explore multi-agent LLM systems for more comprehensive evaluation capabilities</li>
+                <li>Deepen integration with simulation environments for real-time testing and validation</li>
+                <li>Investigate fine-tuned domain-specific judges to further enhance evaluation accuracy and consistency across safety-critical automotive applications</li>
+            </ul>
+        </div>
+    </article>
+
+    <svg class="decorative-wave" viewBox="0 0 1200 200" preserveAspectRatio="none" style="margin-top: 60px;">
+        <path d="M 0 0 C 60 0 120 180 280 190 C 400 195 550 110 700 100 C 850 90 1000 130 1200 160 L 1200 200 L 0 200 Z" 
+              fill="rgba(244, 168, 184, 0.15)"/>
+        <path d="M 0 20 C 60 20 120 200 280 200 C 400 200 550 130 700 120 C 850 110 1000 150 1200 180 L 1200 200 L 0 200 Z" 
+              fill="rgba(244, 168, 184, 0.08)" opacity="0.6"/>
+    </svg>
+</body>
+</html>
