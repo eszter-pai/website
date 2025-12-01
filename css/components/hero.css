@@ -2,6 +2,7 @@
 
 .text-content {
     text-align: left;
+    max-width: 550px;
 }
 
 .main-heading {
@@ -43,10 +44,20 @@
     letter-spacing: 1px;
 }
 
+.cta-button i {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
 .cta-button:hover {
     background-color: var(--pink-light);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(244, 168, 184, 0.3);
+}
+
+.cta-button:hover i {
+    transform: translateY(3px);
 }
 
 .social-icons {

@@ -83,6 +83,27 @@
     .mobile-tap-hint {
         display: block !important;
     }
+
+    /* Truncate article descriptions on mobile */
+    .article-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .article-image {
+        height: 200px;
+    }
+
+    .article-content {
+        padding: 1.5rem;
+    }
+
+    .article-content h3 {
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 480px) {
