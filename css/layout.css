@@ -1,9 +1,11 @@
 /* Layout Styles */
 
 .container {
-
-    margin: 27 auto;
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
     padding: 0 2rem;
+    box-sizing: border-box;
 }
 
 /* Hero Section */
@@ -37,8 +39,8 @@
     overflow: hidden;
     padding-bottom: 18rem;
     padding-top: 0rem;
-    padding-left: 15rem;
-    padding-right: 15rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
 }
 
 .section-header {

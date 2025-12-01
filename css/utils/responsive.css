@@ -1,6 +1,6 @@
 /* Responsive Design */
 
-@media (max-width: 1024px) {
+@media (max-width: 1520px) {
     .hero-content {
         flex-direction: column;
         gap: 3rem;
@@ -25,6 +25,15 @@
 
     .articles-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* First two articles on top row, third article spans full width below */
+    .article-card:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
     }
 
     .article-card:first-child,
@@ -41,7 +50,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 965px) {
     .main-heading {
         font-size: 3rem;
     }
@@ -84,6 +93,19 @@
         display: block !important;
     }
 
+    /* Single column layout for tablets */
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .article-card:nth-child(3) {
+        grid-column: auto;
+        max-width: 100%;
+    }
+
     /* Truncate article descriptions on mobile */
     .article-description {
         display: -webkit-box;
@@ -118,6 +140,8 @@
 
     .articles-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
     }
 
     .section-header h2 {
@@ -129,10 +153,18 @@
     }
 
     .articles-section {
-        padding: 2rem 1rem !important;
+        padding: 2rem 0.5rem !important;
     }
 
     .container {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .article-content h3 {
+        font-size: 1rem;
+    }
+
+    .article-description {
+        font-size: 0.9rem;
     }
 }

@@ -4,9 +4,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    max-width: 1400px;
+    max-width: 1500px;
+    width: 100%;
     margin: 0 auto;
-    align-items: stretch;
     margin-top: 3rem;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
