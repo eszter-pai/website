@@ -111,14 +111,27 @@ document.addEventListener('mousemove', function(e) {
 function animateCursorPaw() {
     if (isMobile) return; // Skip on mobile
     
-    // Add lag effect (smooth following)
-    const lag = 0.05;
+    // Calculate distance between paw and cursor
+    const distance = Math.sqrt(Math.pow(targetX - pawX, 2) + Math.pow(targetY - pawY, 2));
+    
+    // If paw is close to cursor (within 5px), snap to position; otherwise use lag
+    let lag;
+    if (distance < 5) {
+        lag = 1; // No lag, instant follow
+    } else {
+        lag = 0.05; // Normal lag effect
+    }
+    
     pawX += (targetX - pawX) * lag;
     pawY += (targetY - pawY) * lag;
     
-    // Add slight randomness
-    const randomOffsetX = (Math.random() - 0.5) * 2;
-    const randomOffsetY = (Math.random() - 0.5) * 2;
+    // Add slight randomness only when lagging
+    let randomOffsetX = 0;
+    let randomOffsetY = 0;
+    if (lag < 1) {
+        randomOffsetX = (Math.random() - 0.5) * 2;
+        randomOffsetY = (Math.random() - 0.5) * 2;
+    }
     
     // Slowly rotate the paw
     rotation += 0.5;
