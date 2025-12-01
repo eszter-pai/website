@@ -45,6 +45,48 @@ a {
     cursor: url('../img/cat_cursor.png'), pointer;
 }
 
+/* Language toggle buttons */
+.language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--gray-text);
+    font-size: 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: url('../img/cat_cursor.png'), pointer;
+    transition: color 0.3s ease;
+    padding: 4px 6px;
+}
+
+.lang-btn:hover {
+    color: var(--pink-light);
+}
+
+.lang-btn.active {
+    color: var(--pink);
+    font-weight: bold;
+}
+
+.lang-divider {
+    color: var(--gray-text);
+    font-size: 0.9rem;
+}
+
+/* Smooth language transition */
+[data-en][data-de] {
+    transition: opacity 0.3s ease;
+}
+
+[data-en][data-de].fade-out {
+    opacity: 0;
+}
+
 /* Cursor follower paw */
 #cursor-paw {
     position: fixed;

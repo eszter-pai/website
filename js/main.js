@@ -7,6 +7,62 @@ document.querySelector('.scroll-down').addEventListener('click', function(e) {
     });
 });
 
+// Language toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    let currentLang = localStorage.getItem('language') || 'en';
+    
+    // Set initial language
+    setLanguage(currentLang);
+    
+    // Add click listeners to language buttons
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            setLanguage(lang);
+            localStorage.setItem('language', lang);
+        });
+    });
+    
+    function setLanguage(lang) {
+        // Update active button
+        langButtons.forEach(btn => {
+            if (btn.getAttribute('data-lang') === lang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        // Update all elements with translation data with smooth transition
+        const elements = document.querySelectorAll('[data-en][data-de]');
+        
+        // Fade out
+        elements.forEach(element => {
+            element.classList.add('fade-out');
+        });
+        
+        // Wait for fade out, then change content and fade in
+        setTimeout(() => {
+            elements.forEach(element => {
+                const translation = element.getAttribute('data-' + lang);
+                if (translation) {
+                    element.innerHTML = translation;
+                }
+            });
+            
+            // Fade in
+            setTimeout(() => {
+                elements.forEach(element => {
+                    element.classList.remove('fade-out');
+                });
+            }, 50);
+        }, 300);
+        
+        currentLang = lang;
+    }
+});
+
 // Hide scroll-down button after user scrolls
 window.addEventListener('scroll', function() {
     const scrollButton = document.querySelector('.scroll-down');
