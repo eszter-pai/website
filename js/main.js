@@ -89,7 +89,7 @@ let pawX = 0;
 let pawY = 0;
 let targetX = 0;
 let targetY = 0;
-let rotation = 0;
+let rotation = 45; // Default rotation (image points to right side 45 degrees)
 
 // Track mouse movement for cursor paw
 document.addEventListener('mousemove', function(e) {
@@ -116,28 +116,29 @@ function animateCursorPaw() {
     
     // If paw is close to cursor (within 5px), snap to position; otherwise use lag
     let lag;
-    if (distance < 5) {
-        lag = 1; // No lag, instant follow
+    if (distance < 100) {
+        lag = 0; // No lag, instant follow
     } else {
-        lag = 0.05; // Normal lag effect
+        lag = 0.02; // Normal lag effect
+
     }
+
+    // Calculate direction angle before updating position
+    const deltaX = targetX - pawX;
+    const deltaY = targetY - pawY;
     
+    // Only update rotation if there's significant movement
+    if (Math.abs(deltaX) > 0.1 || Math.abs(deltaY) > 0.1) {
+        // Calculate angle in degrees (atan2 returns radians)
+        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI) + 20;
+        rotation = angle;
+    }
+
     pawX += (targetX - pawX) * lag;
     pawY += (targetY - pawY) * lag;
     
-    // Add slight randomness only when lagging
-    let randomOffsetX = 0;
-    let randomOffsetY = 0;
-    if (lag < 1) {
-        randomOffsetX = (Math.random() - 0.5) * 2;
-        randomOffsetY = (Math.random() - 0.5) * 2;
-    }
-    
-    // Slowly rotate the paw
-    rotation += 0.5;
-    
-    cursorPaw.style.left = (pawX + randomOffsetX) + 'px';
-    cursorPaw.style.top = (pawY + randomOffsetY) + 'px';
+    cursorPaw.style.left = (pawX) + 'px';
+    cursorPaw.style.top = (pawY) + 'px';
     cursorPaw.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
     
     requestAnimationFrame(animateCursorPaw);
