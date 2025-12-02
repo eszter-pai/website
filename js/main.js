@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Update CV download link
+        const cvLink = document.getElementById('cv-download');
+        if (cvLink) {
+            cvLink.href = lang === 'en' ? 'img/resume_EN_Eszter.pdf' : 'img/resume_DE_Eszter.pdf';
+        }
+        
         // Update all elements with translation data with smooth transition
         const elements = document.querySelectorAll('[data-en][data-de]');
         
