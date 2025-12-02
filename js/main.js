@@ -508,11 +508,14 @@ if (!isMobile) {
                     if (cheeseDialogue) {
                         cheeseDialogue.textContent = 'Thank you!';
                         
+                        // Store reference to current dialogue before timeout
+                        const dialogueToRemove = cheeseDialogue;
+                        cheeseDialogue = null; // Clear reference immediately
+                        
                         // Remove "Thank you!" dialogue after 2 seconds
                         setTimeout(() => {
-                            if (cheeseDialogue) {
-                                cheeseDialogue.remove();
-                                cheeseDialogue = null;
+                            if (dialogueToRemove && dialogueToRemove.parentElement) {
+                                dialogueToRemove.remove();
                             }
                         }, 2000);
                     }
