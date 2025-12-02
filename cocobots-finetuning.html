@@ -158,6 +158,148 @@
                 font-size: 1rem;
             }
         }
+
+        /* Results Table Styles */
+        .results-table-wrapper {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .results-table thead tr:first-child {
+            background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);
+        }
+
+        .results-table thead tr:nth-child(2) {
+            background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);
+        }
+
+        .results-table thead tr:nth-child(3) {
+            background: rgba(244, 168, 184, 0.3);
+        }
+
+        .results-table th {
+            padding: 16px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .results-table thead tr:nth-child(3) th {
+            padding: 10px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .results-table th.left-align {
+            text-align: left;
+        }
+
+        .results-table th.center-align {
+            text-align: center;
+        }
+
+        .results-table th.subheader-padding {
+            padding: 12px;
+            font-weight: 500;
+        }
+
+        .results-table th.border-right {
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .results-table th.border-right-light {
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .results-table th.border-right-pink {
+            border-right: 1px solid rgba(244, 168, 184, 0.3);
+        }
+
+        .results-table th.border-right-pink-light {
+            border-right: 1px solid rgba(244, 168, 184, 0.2);
+        }
+
+        .results-table th.bg-highlight {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .results-table tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        .results-table tbody tr:hover {
+            background-color: rgba(244, 168, 184, 0.05);
+        }
+
+        .results-table td {
+            padding: 14px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .results-table td.model-name {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .results-table td.score-perfect {
+            color: #0066cc;
+            font-weight: 700;
+        }
+
+        .results-table td.score-high {
+            font-weight: 700;
+        }
+
+        .results-table td.bg-highlight-pink {
+            background: rgba(244, 168, 184, 0.1);
+        }
+
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .evaluation-card {
+            background: rgba(244, 168, 184, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #f4a8b8;
+        }
+
+        .evaluation-card h3 {
+            color: #f4a8b8;
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .evaluation-card ul {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 2;
+        }
+
+        .evaluation-card p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .evaluation-card strong {
+            color: #f4a8b8;
+        }
     </style>
 </head>
 <body>
@@ -183,7 +325,7 @@
             <p>
                 This project explores the challenges of teaching Large Language Models to generate <span class="highlight">higher-order code</span> 
                 rather than simple first-order instructions. Developed as part of a university module at Universität Potsdam, 
-                the work investigates common LLM code generation issues through the lens of the COCOBOTS domain—a code generation 
+                the work investigates common LLM code generation issues through the lens of the COCOBOTS domain. A code generation 
                 task where models must instruct bots to place objects on game boards.
             </p>
 
@@ -206,7 +348,7 @@
             </p>
 
             <div class="code-example">
-                <h4>First-Order Code (Explicit Instructions):</h4>
+                <h4>First-Order Code:</h4>
                 <pre>put(board, "nut", "red", 4, 3)
 put(board, "washer", "yellow", 4, 3)</pre>
             </div>
@@ -217,7 +359,7 @@ put(board, "washer", "yellow", 4, 3)</pre>
             </p>
 
             <div class="code-example">
-                <h4>Higher-Order Code (Abstract Functions):</h4>
+                <h4>Higher-Order Code:</h4>
                 <pre>def m5(board, colors, x, y):
     shapes = ["nut", "washer"]
     for shape, color in zip(shapes, colors):
@@ -232,52 +374,28 @@ m5(board, ["red", "yellow"], 4, 2)</pre>
                 evaluations across multiple models, datasets, and metrics:
             </p>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0;">
-                <div style="background: rgba(244, 168, 184, 0.1); padding: 25px; border-radius: 12px; border-left: 4px solid #f4a8b8;">
-                    <h3 style="color: #f4a8b8; margin-top: 0; font-size: 1.3rem;">Models</h3>
-                    <ul style="margin: 0; padding-left: 20px; line-height: 2;">
-                        <li>Codellama-Instruct 7B/13B</li>
-                        <li>Llama 3.1 -8B</li>
-                        <li>Llama 3.2 -3B</li>
-                        <li>Mistral 7B</li>
-                        <li>Stable Code 3B</li>
-                    </ul>
-                </div>
-
-                <div style="background: rgba(244, 168, 184, 0.1); padding: 25px; border-radius: 12px; border-left: 4px solid #f4a8b8;">
-                    <h3 style="color: #f4a8b8; margin-top: 0; font-size: 1.3rem;">Dataset</h3>
+            <div class="evaluation-grid">
+                <div class="evaluation-card">
+                    <h3>Dataset</h3>
                     <div style="margin-bottom: 20px;">
-                        <strong style="color: #f4a8b8;">First-Order</strong>
-                        <p style="margin: 8px 0; line-height: 1.6;">Train (4144)<br>Validation (500)<br>Test (500)</p>
+                        <strong>First-Order</strong>
+                        <p>Train (4144)<br>Validation (500)<br>Test (500)</p>
                     </div>
                     <div>
-                        <strong style="color: #f4a8b8;">Higher-Order</strong>
-                        <p style="margin: 8px 0; line-height: 1.6;">Train (1072)<br>Validation (130)<br>Test (130)</p>
+                        <strong>Higher-Order</strong>
+                        <p>Train (1072)<br>Validation (130)<br>Test (130)</p>
                     </div>
                 </div>
 
-                <div style="background: rgba(244, 168, 184, 0.1); padding: 25px; border-radius: 12px; border-left: 4px solid #f4a8b8;">
-                    <h3 style="color: #f4a8b8; margin-top: 0; font-size: 1.3rem;">Metrics</h3>
-                    <ul style="margin: 0; padding-left: 20px; line-height: 2;">
+                <div class="evaluation-card">
+                    <h3>Metrics</h3>
+                    <ul>
                         <li><strong>Exact Match (EM)</strong></li>
                         <li><strong>CodeBLEU</strong></li>
                         <li><strong>Execution Success (ES)</strong></li>
                     </ul>
                 </div>
             </div>
-
-            <h2>Project Goals</h2>
-            <p>
-                The primary objective was to fine-tune smaller LLMs using <span class="highlight">LoRA (Low-Rank Adaptation)</span> 
-                techniques to generate higher-order code consistently. This involved:
-            </p>
-            <ul>
-                <li>Evaluating multiple models (3B to 13B parameters) to find the optimal balance between efficiency and performance</li>
-                <li>Creating specialized training datasets with both first-order (4144 samples) and higher-order (1072 samples) COCOBOTS code</li>
-                <li>Implementing LoRA fine-tuning to adapt models efficiently without full retraining</li>
-                <li>Measuring performance using Exact Match, CodeBLEU, and Execution Success metrics</li>
-                <li>Analyzing the model's ability to abstract patterns and handle both code generation paradigms</li>
-            </ul>
 
             <h2>Technology Stack</h2>
             <div class="tech-stack">
@@ -291,144 +409,123 @@ m5(board, ["red", "yellow"], 4, 2)</pre>
                 <span class="tech-tag">Model Fine-Tuning</span>
             </div>
 
-            <h2>The COCOBOTS Domain</h2>
-            <p>
-                COCOBOTS is a code generation benchmark where natural language instructions describe spatial arrangements of objects 
-                on a grid-based board. The task requires understanding:
-            </p>
-            <ul>
-                <li><strong>Spatial reasoning:</strong> Interpreting positions like "5th row, 3rd column"</li>
-                <li><strong>Object properties:</strong> Managing attributes such as colors, shapes, and types</li>
-                <li><strong>Sequential operations:</strong> Stacking, placing, and arranging multiple objects</li>
-                <li><strong>Code abstraction:</strong> Recognizing patterns that can be generalized into functions</li>
-            </ul>
-
             <h2>Fine-Tuning Approach</h2>
             <p>
-                Using <span class="highlight">LoRA (Low-Rank Adaptation)</span>, we fine-tuned a base language model on curated 
-                examples of higher-order COCOBOTS code. LoRA enables efficient adaptation by injecting trainable low-rank matrices 
-                into the transformer layers, significantly reducing the computational cost compared to full fine-tuning.
-            </p>
-            <p>
-                The training process focused on teaching the model to recognize patterns in object placement instructions and 
-                translate them into reusable function definitions rather than repetitive explicit commands.
+                Using <span class="highlight">LoRA (Low-Rank Adaptation)</span> with <span class="highlight">Unsloth</span>, 
+                we efficiently fine-tuned language models on curated COCOBOTS code examples. This approach significantly reduces 
+                computational costs while teaching models to recognize patterns and generate reusable function definitions.
             </p>
 
             <h2>Results - First-Order Training, Inference on Both</h2>
-            <p>
-                The table below presents the performance of models trained on first-order code and then tested on both 
-                first-order and higher-order code generation tasks. This evaluation demonstrates the models' ability to 
-                generalize across different code abstraction levels:
-            </p>
 
-            <div style="overflow-x: auto; margin: 30px 0; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-                <table style="width: 100%; border-collapse: collapse; background: white; font-size: 0.9rem; font-family: 'Inter', sans-serif;">
+            <div class="results-table-wrapper">
+                <table class="results-table">
                     <thead>
-                        <tr style="background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);">
-                            <th rowspan="2" style="padding: 16px; text-align: left; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">Models</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">Exact Match</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">CodeBLEU</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600;">Execution Success</th>
+                        <tr>
+                            <th rowspan="2" class="left-align border-right">Models</th>
+                            <th colspan="4" class="center-align border-right">Exact Match</th>
+                            <th colspan="4" class="center-align border-right">CodeBLEU</th>
+                            <th colspan="4" class="center-align">Execution Success</th>
                         </tr>
-                        <tr style="background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);">
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.3);">Fine-Tuned</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.3);">Fine-Tuned</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500;">Fine-Tuned</th>
+                        <tr>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding border-right">Fine-Tuned</th>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding border-right">Fine-Tuned</th>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding">Fine-Tuned</th>
                         </tr>
-                        <tr style="background: rgba(244, 168, 184, 0.3);">
-                            <th style="padding: 10px; text-align: left; color: #2c3e50; font-weight: 500; border-right: 1px solid rgba(244, 168, 184, 0.3);"></th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.3);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.3);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">Higher-Order</th>
+                        <tr>
+                            <th class="border-right-pink"></th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th>Higher-Order</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">CodeLlama-7b-Instruct</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">47.20%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">29.04%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.77%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">78.96%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">16.44%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700; background: rgba(244, 168, 184, 0.1);">91.40%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">14.60%</td>
+                        <tr>
+                            <td class="model-name">CodeLlama-7b-Instruct</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>47.20%</td>
+                            <td>0.00%</td>
+                            <td>29.04%</td>
+                            <td>12.77%</td>
+                            <td>78.96%</td>
+                            <td>16.44%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-high bg-highlight-pink">91.40%</td>
+                            <td>14.60%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">CodeLlama-13b-Instruct</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">9.80%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">27.08%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">13.54%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">69.81%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">16.22%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700; background: rgba(244, 168, 184, 0.1);">84.80%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">11.50%</td>
+                        <tr>
+                            <td class="model-name">CodeLlama-13b-Instruct</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>9.80%</td>
+                            <td>0.00%</td>
+                            <td>27.08%</td>
+                            <td>13.54%</td>
+                            <td>69.81%</td>
+                            <td>16.22%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-high bg-highlight-pink">84.80%</td>
+                            <td>11.50%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Llama-3.1-8B</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">54.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.10%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.59%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">80.89%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">13.42%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700; background: rgba(244, 168, 184, 0.1);">100%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">76.92%</td>
+                        <tr>
+                            <td class="model-name">Llama-3.1-8B</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>54.00%</td>
+                            <td>0.00%</td>
+                            <td>25.10%</td>
+                            <td>12.59%</td>
+                            <td>80.89%</td>
+                            <td>13.42%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-high bg-highlight-pink">100%</td>
+                            <td>76.92%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Llama-3.2-3B</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">44.40%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.48%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.81%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">76.97%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">29.08%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700; background: rgba(244, 168, 184, 0.1);">81%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">4.60%</td>
+                        <tr>
+                            <td class="model-name">Llama-3.2-3B</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>44.40%</td>
+                            <td>0.00%</td>
+                            <td>25.48%</td>
+                            <td>12.81%</td>
+                            <td>76.97%</td>
+                            <td>29.08%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-high bg-highlight-pink">81%</td>
+                            <td>4.60%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Mistral-7B-v0.1</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">100.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.44%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.86%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">100.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">10.68%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">100%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">65.38%</td>
+                        <tr>
+                            <td class="model-name">Mistral-7B-v0.1</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect">100.00%</td>
+                            <td>0.00%</td>
+                            <td>25.44%</td>
+                            <td>12.86%</td>
+                            <td class="score-perfect">100.00%</td>
+                            <td>10.68%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">100%</td>
+                            <td>65.38%</td>
                         </tr>
                     </tbody>
                 </table>
@@ -436,313 +533,271 @@ m5(board, ["red", "yellow"], 4, 2)</pre>
 
             <h2>Key Findings</h2>
             <ul>
-                <li><strong>Pretrained Model Limitations:</strong> All pretrained models showed 0% performance on both first-order and higher-order tasks, indicating they require fine-tuning for COCOBOTS-specific code generation</li>
-                <li><strong>Fine-Tuning Impact:</strong> After fine-tuning on first-order data, models achieved significant improvements in first-order tasks (ranging from 9.8% to 100% Exact Match), but struggled with higher-order generalization</li>
-                <li><strong>Execution Success Advantage:</strong> Models demonstrated high execution success rates (81-100%) on first-order tasks after fine-tuning, showing that generated code is often functionally correct even without exact matches</li>
-                <li><strong>Mistral's Outstanding Performance:</strong> Mistral-7B achieved perfect scores (100%) across all first-order metrics after fine-tuning, demonstrating exceptional learning from the training data</li>
-                <li><strong>Cross-Order Generalization Gap:</strong> Models trained on first-order code showed minimal ability to generate higher-order code, with most achieving 0% Exact Match on higher-order tasks, highlighting the abstraction challenge</li>
-            </ul>
-
-            <h2>Common LLM Code Generation Issues</h2>
-            <p>
-                This project highlighted several recurring problems in LLM-based code generation:
-            </p>
-            <ul>
-                <li><strong>Verbosity:</strong> Models tend to produce unnecessarily explicit code rather than leveraging abstraction</li>
-                <li><strong>Lack of DRY Principle:</strong> Repeated code blocks instead of function definitions</li>
-                <li><strong>Context Limitations:</strong> Difficulty maintaining consistency across longer code sequences</li>
-                <li><strong>Domain-Specific Logic:</strong> Struggles with understanding specialized domains without targeted training</li>
+                <li>Mistral-7B achieved perfect 100% scores across all first-order metrics after fine-tuning</li>
+                <li>All models showed 0% Exact Match on higher-order tasks, indicating no cross-order generalization</li>
+                <li>Execution Success rates (81-100%) were significantly higher than Exact Match scores, suggesting functionally correct but syntactically different outputs</li>
             </ul>
 
             <h2>Results - Higher-Order Training, Inference on Both</h2>
-            <p>
-                The second evaluation examines models trained on higher-order code and tested on both abstraction levels. 
-                This experiment reveals whether models can learn to generate abstracted code while maintaining the ability 
-                to produce simpler first-order solutions when needed:
-            </p>
 
-            <div style="overflow-x: auto; margin: 30px 0; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-                <table style="width: 100%; border-collapse: collapse; background: white; font-size: 0.9rem; font-family: 'Inter', sans-serif;">
+            <div class="results-table-wrapper">
+                <table class="results-table">
                     <thead>
-                        <tr style="background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);">
-                            <th rowspan="2" style="padding: 16px; text-align: left; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">Models</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">Exact Match</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">CodeBLEU</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600;">Execution Success</th>
+                        <tr>
+                            <th rowspan="2" class="left-align border-right">Models</th>
+                            <th colspan="4" class="center-align border-right">Exact Match</th>
+                            <th colspan="4" class="center-align border-right">CodeBLEU</th>
+                            <th colspan="4" class="center-align">Execution Success</th>
                         </tr>
-                        <tr style="background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);">
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.3);">Fine-Tuned</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.3);">Fine-Tuned</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500;">Fine-Tuned</th>
+                        <tr>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding border-right">Fine-Tuned</th>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding border-right">Fine-Tuned</th>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding">Fine-Tuned</th>
                         </tr>
-                        <tr style="background: rgba(244, 168, 184, 0.3);">
-                            <th style="padding: 10px; text-align: left; color: #2c3e50; font-weight: 500; border-right: 1px solid rgba(244, 168, 184, 0.3);"></th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.3);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.3);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">Higher-Order</th>
+                        <tr>
+                            <th class="border-right-pink"></th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th>Higher-Order</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">CodeLlama-7b-Instruct</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">2.60%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">7.69%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">29.04%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.77%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">47.27%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700; background: rgba(244, 168, 184, 0.1);">72.76%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">14.60%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">41.50%</td>
+                        <tr>
+                            <td class="model-name">CodeLlama-7b-Instruct</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>2.60%</td>
+                            <td>7.69%</td>
+                            <td>29.04%</td>
+                            <td>12.77%</td>
+                            <td>47.27%</td>
+                            <td class="score-high bg-highlight-pink">72.76%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>14.60%</td>
+                            <td>41.50%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">CodeLlama-13b-Instruct</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">27.08%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">13.54%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700;">67.25%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">23.09%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">89.20%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">11.50%</td>
+                        <tr>
+                            <td class="model-name">CodeLlama-13b-Instruct</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>27.08%</td>
+                            <td>13.54%</td>
+                            <td class="score-high">67.25%</td>
+                            <td>23.09%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">89.20%</td>
+                            <td>11.50%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Llama-3.1-8B</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">26.15%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.10%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.59%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">52.76%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700; background: rgba(244, 168, 184, 0.1);">81.66%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">14.80%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">83.80%</td>
+                        <tr>
+                            <td class="model-name">Llama-3.1-8B</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>26.15%</td>
+                            <td>25.10%</td>
+                            <td>12.59%</td>
+                            <td>52.76%</td>
+                            <td class="score-high bg-highlight-pink">81.66%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>14.80%</td>
+                            <td class="score-perfect">83.80%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Llama-3.2-3B</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">13.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">11.54%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.48%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.81%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">57.83%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700;">60.93%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">24%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">23.80%</td>
+                        <tr>
+                            <td class="model-name">Llama-3.2-3B</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>13.00%</td>
+                            <td>11.54%</td>
+                            <td>25.48%</td>
+                            <td>12.81%</td>
+                            <td>57.83%</td>
+                            <td class="score-high">60.93%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>24%</td>
+                            <td>23.80%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Mistral-7B-v0.1</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.44%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.86%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">36.90%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">58.33%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700;">65.38%</td>
+                        <tr>
+                            <td class="model-name">Mistral-7B-v0.1</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>25.44%</td>
+                            <td>12.86%</td>
+                            <td>36.90%</td>
+                            <td>58.33%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>0%</td>
+                            <td class="score-high">65.38%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <h3>Comparative Analysis</h3>
-            <p>
-                Comparing the two training approaches reveals important insights about code abstraction learning:
-            </p>
+            <h2>Key Findings</h2>
             <ul>
-                <li><strong>Higher-Order Performance:</strong> Models trained on higher-order code achieved significantly better higher-order generation (up to 26.15% vs 0% Exact Match for Llama-3.1), demonstrating the importance of exposure to abstracted patterns</li>
-                <li><strong>Bidirectional Capability:</strong> Higher-order training maintained reasonable first-order performance, suggesting models can learn to generate both abstraction levels when trained on complex examples</li>
-                <li><strong>CodeBLEU Improvements:</strong> Higher-order training showed enhanced CodeBLEU scores for higher-order tasks (72.76% to 81.66%), indicating better structural similarity to reference code</li>
-                <li><strong>Execution Success Advantage:</strong> Higher-order trained models achieved strong execution success on higher-order tasks (up to 83.80%), showing functional correctness despite lower exact matches</li>
-                <li><strong>Trade-offs:</strong> While first-order training excelled at first-order tasks (100% for Mistral), higher-order training provided more balanced performance across both abstraction levels</li>
+                <li>Llama-3.1-8B achieved 26.15% Exact Match and 83.80% Execution Success on higher-order tasks, the best higher-order performance</li>
+                <li>CodeBLEU scores for higher-order tasks reached 72.76-81.66%, indicating good structural similarity despite lower exact matches</li>
+                <li>Most models struggled with first-order Exact Match (0-13%), but maintained reasonable Execution Success, showing bidirectional capability</li>
             </ul>
 
             <h2>Results - Both Training, Inference on Both</h2>
-            <p>
-                The final evaluation combines both first-order and higher-order training data, testing whether exposure to 
-                diverse code abstraction levels during training produces the most versatile models capable of handling both 
-                paradigms effectively:
-            </p>
 
-            <div style="overflow-x: auto; margin: 30px 0; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-                <table style="width: 100%; border-collapse: collapse; background: white; font-size: 0.9rem; font-family: 'Inter', sans-serif;">
+            <div class="results-table-wrapper">
+                <table class="results-table">
                     <thead>
-                        <tr style="background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);">
-                            <th rowspan="2" style="padding: 16px; text-align: left; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">Models</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">Exact Match</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.3);">CodeBLEU</th>
-                            <th colspan="4" style="padding: 16px; text-align: center; color: white; font-weight: 600;">Exec Success</th>
+                        <tr>
+                            <th rowspan="2" class="left-align border-right">Models</th>
+                            <th colspan="4" class="center-align border-right">Exact Match</th>
+                            <th colspan="4" class="center-align border-right">CodeBLEU</th>
+                            <th colspan="4" class="center-align">Exec Success</th>
                         </tr>
-                        <tr style="background: linear-gradient(135deg, #f4a8b8 0%, #f4b8c5 100%);">
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.3);">Fine-Tuned</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.3);">Fine-Tuned</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500; border-right: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);">Pretrained</th>
-                            <th colspan="2" style="padding: 12px; text-align: center; color: white; font-weight: 500;">Fine-Tuned</th>
+                        <tr>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding border-right">Fine-Tuned</th>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding border-right">Fine-Tuned</th>
+                            <th colspan="2" class="center-align subheader-padding border-right-light bg-highlight">Pretrained</th>
+                            <th colspan="2" class="center-align subheader-padding">Fine-Tuned</th>
                         </tr>
-                        <tr style="background: rgba(244, 168, 184, 0.3);">
-                            <th style="padding: 10px; text-align: left; color: #2c3e50; font-weight: 500; border-right: 1px solid rgba(244, 168, 184, 0.3);"></th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.3);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.3);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem; border-right: 1px solid rgba(244, 168, 184, 0.2);">Higher-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">First-Order</th>
-                            <th style="padding: 10px; text-align: center; color: #2c3e50; font-weight: 500; font-size: 0.85rem;">Higher-Order</th>
+                        <tr>
+                            <th class="border-right-pink"></th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th class="border-right-pink-light">Higher-Order</th>
+                            <th>First-Order</th>
+                            <th>Higher-Order</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">CodeLlama-7b-Instruct</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">95.40%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">44.62%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">29.04%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.77%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">98.36%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">90.57%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">95.40%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">54.60%</td>
+                        <tr>
+                            <td class="model-name">CodeLlama-7b-Instruct</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect">95.40%</td>
+                            <td>44.62%</td>
+                            <td>29.04%</td>
+                            <td>12.77%</td>
+                            <td class="score-perfect">98.36%</td>
+                            <td class="score-perfect bg-highlight-pink">90.57%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">95.40%</td>
+                            <td>54.60%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">CodeLlama-13b-Instruct</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">92.40%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">6.92%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">27.08%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">13.54%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">98.74%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">34.41%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">92.40%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700;">69.20%</td>
+                        <tr>
+                            <td class="model-name">CodeLlama-13b-Instruct</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect">92.40%</td>
+                            <td>6.92%</td>
+                            <td>27.08%</td>
+                            <td>13.54%</td>
+                            <td class="score-perfect">98.74%</td>
+                            <td>34.41%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">92.40%</td>
+                            <td class="score-high">69.20%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Llama-3.1-8B</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">54.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">3.08%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.10%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.59%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">80.89%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">36.52%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">100%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">22.30%</td>
+                        <tr>
+                            <td class="model-name">Llama-3.1-8B</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>54.00%</td>
+                            <td>3.08%</td>
+                            <td>25.10%</td>
+                            <td>12.59%</td>
+                            <td>80.89%</td>
+                            <td>36.52%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">100%</td>
+                            <td>22.30%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Llama-3.2-3B</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">54.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">19.23%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.48%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.81%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">80.89%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700;">81.68%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">100%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">53%</td>
+                        <tr>
+                            <td class="model-name">Llama-3.2-3B</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td>54.00%</td>
+                            <td>19.23%</td>
+                            <td>25.48%</td>
+                            <td>12.81%</td>
+                            <td>80.89%</td>
+                            <td class="score-high">81.68%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">100%</td>
+                            <td>53%</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease;">
-                            <td style="padding: 14px; color: #2c3e50; font-weight: 600;">Mistral-7B-v0.1</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">100.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">4.62%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">25.44%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">12.86%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700;">100.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50; font-weight: 700;">74.25%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">0.00%</td>
-                            <td style="padding: 14px; text-align: center; color: #0066cc; font-weight: 700; background: rgba(244, 168, 184, 0.1);">100%</td>
-                            <td style="padding: 14px; text-align: center; color: #2c3e50;">27.69%</td>
+                        <tr>
+                            <td class="model-name">Mistral-7B-v0.1</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect">100.00%</td>
+                            <td>4.62%</td>
+                            <td>25.44%</td>
+                            <td>12.86%</td>
+                            <td class="score-perfect">100.00%</td>
+                            <td class="score-high">74.25%</td>
+                            <td>0.00%</td>
+                            <td>0.00%</td>
+                            <td class="score-perfect bg-highlight-pink">100%</td>
+                            <td>27.69%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <h3>Combined Training Analysis</h3>
-            <p>
-                The combined training approach reveals the benefits and limitations of exposing models to diverse code patterns:
-            </p>
+            <h2>Key Findings</h2>
             <ul>
-                <li><strong>Best First-Order Performance:</strong> Combined training achieved exceptional first-order results (95.40% to 100% Exact Match), matching or exceeding first-order-only training performance</li>
-                <li><strong>Improved Higher-Order Scores:</strong> Models showed significant gains in higher-order generation (up to 44.62% for CodeLlama-7b) compared to first-order-only training, though not as strong as higher-order-only training</li>
-                <li><strong>Balanced CodeBLEU Metrics:</strong> CodeBLEU scores improved across both tasks, with CodeLlama-7b achieving 98.36% first-order and 90.57% higher-order, demonstrating better structural code quality</li>
-                <li><strong>Optimal Execution Success:</strong> Combined training produced the most reliable executable code, with three models achieving 100% execution success on first-order tasks and improved higher-order execution rates (up to 69.20%)</li>
-                <li><strong>Training Strategy Recommendation:</strong> For production systems requiring versatility, combined training offers the best compromise—excellent first-order performance with reasonable higher-order capabilities, making it the most practical approach for real-world applications</li>
+                <li>Combined training achieved the best balance: 92-100% first-order Exact Match and up to 44.62% higher-order Exact Match</li>
+                <li>CodeLlama-7b showed exceptional CodeBLEU scores (98.36% first-order, 90.57% higher-order), indicating superior code structure quality</li>
+                <li>Three models reached 100% Execution Success on first-order tasks, demonstrating highly reliable code generation</li>
             </ul>
 
-            <h2>Practical Applications</h2>
+            <h2>Error Analysis</h2>
             <p>
-                While this project focused on the COCOBOTS domain, the findings have broader implications:
-            </p>
-            <ul>
-                <li>Improving code generation tools for software developers</li>
-                <li>Teaching LLMs to write cleaner, more maintainable code</li>
-                <li>Developing better benchmarks for evaluating code abstraction capabilities</li>
-                <li>Informing prompt engineering strategies for code-generation tasks</li>
-            </ul>
-
-            <h2>Lessons Learned</h2>
-            <p>
-                This university project provided valuable insights into the limitations and capabilities of LLMs for code generation. 
-                The gap between first-order and higher-order code generation represents a significant challenge in making AI-assisted 
-                programming tools more effective. Fine-tuning with techniques like LoRA offers a promising path forward, but 
-                achieving consistent abstraction remains an open research problem.
+                Beyond overall performance metrics, we analyzed the types of errors generated by the models to understand 
+                their failure modes and identify areas for improvement:
             </p>
 
-            <h2>Future Directions</h2>
+            <img src="img/Error count per model.PNG" alt="Error Analysis - Error Counts per Model" class="post-image">
+
+            <h2>Conclusion</h2>
+            <p>
+                The comprehensive evaluation across different training strategies revealed several key insights:
+            </p>
             <ul>
-                <li>Exploring reinforcement learning approaches to reward code abstraction</li>
-                <li>Developing better evaluation metrics for code quality beyond functional correctness</li>
-                <li>Investigating multi-stage generation pipelines that explicitly separate abstraction from implementation</li>
-                <li>Extending the approach to more complex programming paradigms and languages</li>
+                <li><strong>First-Order Code Inference:</strong> Models achieved high execution success rates (~80-100%) for first-order code generation, irrespective of the training data used. This demonstrates that all training approaches effectively teach models to generate functional first-order code</li>
+                <li><strong>Higher-Order Code Inference:</strong> Performance varied significantly based on training strategy. Models trained only on higher-order data achieved the highest higher-order execution success (83%), while performance decreased with first-order-only training (76%) and combined data training (69%). This suggests a trade-off between specialization and versatility</li>
+                <li><strong>Common Error Patterns:</strong> Syntax Errors (particularly unclosed parentheses) and Placement Errors emerged as the most frequent error types across all models. The Mistral-7B model exhibited notably high placement errors, while CodeLlama models showed more balanced error distributions</li>
             </ul>
         </div>
     </article>
