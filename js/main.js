@@ -7,6 +7,31 @@ document.querySelector('.scroll-down').addEventListener('click', function(e) {
     });
 });
 
+// Smooth page transitions for Read More links
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all internal navigation links (Read More buttons)
+    const navigationLinks = document.querySelectorAll('a.read-more[href$=".html"]');
+    
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Only apply transition for internal HTML pages
+            if (href && href.endsWith('.html')) {
+                e.preventDefault();
+                
+                // Add fade-out class
+                document.body.classList.add('page-transition');
+                
+                // Navigate after transition
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 400);
+            }
+        });
+    });
+});
+
 // Language toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
     const langButtons = document.querySelectorAll('.lang-btn');

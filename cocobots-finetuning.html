@@ -808,5 +808,31 @@ m5(board, ["red", "yellow"], 4, 2)</pre>
         <path d="M 0 20 C 60 20 120 200 280 200 C 400 200 550 130 700 120 C 850 110 1000 150 1200 180 L 1200 200 L 0 200 Z" 
               fill="rgba(244, 168, 184, 0.08)" opacity="0.6"/>
     </svg>
+
+    <script>
+        // Smooth page transition for back to portfolio link
+        document.addEventListener('DOMContentLoaded', function() {
+            const backLink = document.querySelector('.back-link');
+            
+            if (backLink) {
+                backLink.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    // Only apply transition for internal HTML pages
+                    if (href && href.endsWith('.html')) {
+                        e.preventDefault();
+                        
+                        // Add fade-out class
+                        document.body.classList.add('page-transition');
+                        
+                        // Navigate after transition
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 400);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

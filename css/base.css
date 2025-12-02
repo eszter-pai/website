@@ -26,6 +26,11 @@ body {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    transition: opacity 0.4s ease;
+}
+
+body.page-transition {
+    opacity: 0;
 }
 
 /* Mobile tap hint */
