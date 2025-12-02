@@ -28,24 +28,18 @@
         gap: 1.5rem;
     }
 
-    /* First two articles on top row, third article spans full width below */
-    .article-card:nth-child(3) {
-        grid-column: 1 / -1;
-        max-width: 600px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
     .article-card:first-child,
     .article-card:nth-child(2),
-    .article-card:nth-child(3) {
+    .article-card:nth-child(3),
+    .article-card:nth-child(4) {
         transform: translateY(0) !important;
         order: unset !important;
     }
 
     .article-card:first-child:hover,
     .article-card:nth-child(2):hover,
-    .article-card:nth-child(3):hover {
+    .article-card:nth-child(3):hover,
+    .article-card:nth-child(4):hover {
         transform: translateY(-10px) !important;
     }
 }
