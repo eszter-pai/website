@@ -93,6 +93,11 @@
         display: block !important;
     }
 
+    .cheese-icon,
+    .mouse-icon {
+        display: none !important;
+    }
+
     /* Single column layout for tablets */
     .articles-grid {
         grid-template-columns: 1fr;
