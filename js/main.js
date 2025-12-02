@@ -425,7 +425,7 @@ if (!isMobile) {
         mouseWrapper.style.position = 'fixed';
         mouseWrapper.style.width = '80px';
         mouseWrapper.style.height = '80px';
-        mouseWrapper.style.cursor = 'url("../img/cat_cursor.png"), pointer';
+        mouseWrapper.style.cursor = 'pointer';
         mouseWrapper.style.zIndex = '9998';
         mouseWrapper.style.pointerEvents = 'auto';
         mouseWrapper.style.transition = 'opacity 0.3s ease';
