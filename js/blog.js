@@ -1,5 +1,8 @@
 // Smooth page transition for back to portfolio link
 document.addEventListener('DOMContentLoaded', function() {
+    // Remove page-transition class on page load (for browser back/forward navigation)
+    document.body.classList.remove('page-transition');
+    
     const backLink = document.querySelector('.back-link');
     
     if (backLink) {
@@ -20,4 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+});
+
+// handle page show event (for browser back/forward)
+window.addEventListener('pageshow', function(event) {
+    document.body.classList.remove('page-transition');
 });

@@ -9,6 +9,9 @@ document.querySelector('.scroll-down').addEventListener('click', function(e) {
 
 // Smooth page transitions for Read More links
 document.addEventListener('DOMContentLoaded', function() {
+    // Remove page-transition class on page load (for browser back/forward navigation)
+    document.body.classList.remove('page-transition');
+    
     // Get all internal navigation links (Read More buttons)
     const navigationLinks = document.querySelectorAll('a.read-more[href$=".html"]');
     
@@ -825,3 +828,8 @@ if (!isMobile) {
         mouseAnimationId = requestAnimationFrame(animateMouse);
     });
 }
+
+// Handle page show event (for browser back/forward navigation)
+window.addEventListener('pageshow', function(event) {
+    document.body.classList.remove('page-transition');
+});
