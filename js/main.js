@@ -721,7 +721,10 @@ if (!isMobile) {
             lolDialogue.style.zIndex = '10001';
             lolDialogue.style.pointerEvents = 'none';
             lolDialogue.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
-            lolDialogue.style.transform = 'rotate(8deg)';
+            // Set initial position at current rat location before appending
+            lolDialogue.style.left = mouseX + 'px';
+            lolDialogue.style.top = (mouseY - 50) + 'px';
+            lolDialogue.style.transform = 'translate(-50%, -100%) rotate(8deg)';
             document.body.appendChild(lolDialogue);
             
             // Position dialogue above the rat - update immediately without transition
