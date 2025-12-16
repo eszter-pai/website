@@ -1,10 +1,10 @@
 /* Layout Styles */
 
 .container {
-    max-width: 1500px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 2rem; /* symmetric left/right gutter */
     box-sizing: border-box;
 }
 
@@ -12,12 +12,10 @@
 .hero-section {
     flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 18rem;
-    padding-top: 15rem;
-    padding-left: 0;
-    padding-right: 0;
+    align-items: center; /* vertical centering */
+    justify-content: center; /* horizontal centering of content */
+    min-height: 100vh; /* fill viewport height */
+    padding: 0; /* no extra horizontal padding; container handles gutters */
     position: relative;
     z-index: 2;
 }
@@ -25,9 +23,9 @@
 .hero-content {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 4rem;
-    max-width: 1200px;
+    max-width: 100%;
 }
 
 /* Articles Section */
