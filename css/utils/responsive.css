@@ -1,18 +1,7 @@
 /* Responsive Design */
 
 @media (max-width: 1520px) {
-    .hero-content {
-        flex-direction: column;
-        gap: 3rem;
-    }
-
-    .text-content {
-        text-align: center;
-    }
-
-    .action-links {
-        justify-content: center;
-    }
+    /* Keep hero horizontal on laptops/desktops; only scale typography/images here */
 
     .main-heading {
         font-size: 4rem;
@@ -41,6 +30,27 @@
     .article-card:nth-child(3):hover,
     .article-card:nth-child(4):hover {
         transform: translateY(-10px) !important;
+    }
+}
+
+/* Stack hero only on iPad/mobile */
+@media (max-width: 1024px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .text-content {
+        text-align: center;
+    }
+
+    .action-links {
+        justify-content: center;
+    }
+
+    /* Hide scroll prompt when hero stacks vertically */
+    .scroll-down {
+        display: none !important;
     }
 }
 
