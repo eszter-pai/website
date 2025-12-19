@@ -37,8 +37,15 @@
     overflow: hidden;
     padding-bottom: 6rem;
     padding-top: 0rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    /* Narrow side gutters on wide screens */
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Widen container specifically for articles grid and reduce inner gutters */
+.articles-section .container {
+    max-width: 1500px;
+    padding: 0 1rem;
 }
 
 .section-header {
