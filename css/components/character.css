@@ -7,7 +7,7 @@
 .pink-circle {
     width: 400px;
     height: 400px;
-    background-color: var(--pink);
+    background-color: #d9d9d9;
     border-radius: 50%;
     position: relative;
     display: flex;
@@ -18,9 +18,9 @@
 }
 
 .profile-image {
-    position: relative;
-    top: 13px;
-    left: 14px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 }
